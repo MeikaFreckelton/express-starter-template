@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 const Post = new Schema({
     title: {
         type: String,
-        required: true
+        required: [true, "Title is required"],
+        minlength: [3, "Title is too short"]
     },
     create_date: {
         type: Date,
@@ -17,11 +18,14 @@ const Post = new Schema({
     },
     username: {
         type: String,
-        required: true
+        required: [true, "Username is required"],
+        minlength: [3, "Username is too short"]
     },
     content: {
         type: String,
-        required: true
+        required: [true, "content is required"],
+        minlength: [3, "Blog post is too short"],
+        maxlength: [1500, "blog post is too long"]
     },
     category: String
 });

@@ -109,10 +109,31 @@ describe('updatePost', () => {
             }
         };
         await utilities.updatePost(req).exec((err, post) => {
+            // console.log(req.body.title)
             expect(post.title).toBe(req.body.title);
         });
     });
 });
+
+
+describe("addPost missing field", () =>{
+    it("should fail when required field is missing", async function() {
+        const req = {
+            body: {
+                title: "tester",
+                content: "hajskkkeeneklodlodo",
+                category: "something"
+            }
+        }
+        await utilities.addPost(req).save((err, post) => {
+            if (err) {
+                expect(err.message).toMatch(/validation/)
+            } else {
+                expect(true).toBe(false)
+            }
+        })
+    })
+})
 
 // Setup and tear down functions
 
