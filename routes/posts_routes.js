@@ -5,7 +5,8 @@ const {
   getPost,
   makePost,
   removePost,
-  changePost
+  changePost,
+  getComments
 } = require('../controllers/posts_controller');
 
 // READ
@@ -33,4 +34,15 @@ router.delete('/:id', removePost);
 // Updates a post with id
 router.put('/:id', changePost);
 
+// Accepts a param
+// Displays records that include emails that begin with a specific letter
+// router.get("/comments/:startingLetter", getComments)
+// router.get('/comments', function (req, res){
+//   res.send("hello")
+// })
+
+
 module.exports = router;
+
+// get params from route
+// search through comments.body to find body that begins with the specific letter given in params

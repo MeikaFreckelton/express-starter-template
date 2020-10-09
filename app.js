@@ -1,16 +1,24 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const postRouter = require('./routes/posts_routes');
+const {fetchData} = require('./utils/fetch_utilities.js')
+const commentRouter = require('./routes/comment_routes')
 
 const port = process.env.port || 3009;
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
 
-const dbConn = 'mongodb://localhost/blog_app'
+app.use(express.urlencoded({extended: false}))
+
+app.use(express.json())
+
+// parses the data from post requests (req.body)
+// app.use(bodyParser.json());
+
+const dbConn = 'mongodb://localhost/comments_app'
 // Set three properties to avoid deprecation warnings:
 // useNewUrlParser: true
 // useUnifiedTopology: true
@@ -34,6 +42,10 @@ app.get('/', (req, res) => {
 })
 
 app.use('/posts', postRouter);
+app.use('/comments', commentRouter)
+
+// call fetch api from utils
+fetchData();
 
 app.listen(port, () => {
     console.log(`Blog express app listening on port ${port}`);

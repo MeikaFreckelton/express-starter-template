@@ -6,6 +6,8 @@ const {
     updatePost
 } = require('../utils/posts_utilities');
 
+
+
 const getPosts = function (req, res) {
     // execute the query from getAllPosts
     getAllPosts(req).
@@ -75,6 +77,8 @@ const changePost = function (req, res) {
         res.send(post);
     });
 };
+
+
 
 module.exports = {
     getPosts,
